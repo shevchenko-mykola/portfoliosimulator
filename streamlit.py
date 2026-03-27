@@ -11,6 +11,39 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy_financial as npf
 
+# ========== AUTHENTICATION ==========
+# Simple login credentials
+VALID_USERNAME = "admin"
+VALID_PASSWORD = "password123"
+
+def check_login():
+        """Simple authentication check"""
+        if "logged_in" not in st.session_state:
+                    st.session_state.logged_in = False
+
+    if not st.session_state.logged_in:
+                st.markdown("# 🔐 Portfolio Simulator - Login")
+
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+                        username = st.text_input("Username")
+                        password = st.text_input("Password", type="password")
+
+            if st.button("Login"):
+                                if username == VALID_USERNAME and password == VALID_PASSWORD:
+                                                        st.session_state.logged_in = True
+                                                        st.success("Login successful! Refreshing...")
+                                                        st.rerun()
+                                else:
+                                                        st.error("Invalid username or password")
+                                            st.stop()
+    return True
+
+# Check login at the start
+check_login()
+# ========== END AUTHENTICATION =========
+
+
 
 # App Title
 st.set_page_config(page_title="VC Fund Simulator", page_icon="https://atas.vc/img/favicon.png")
